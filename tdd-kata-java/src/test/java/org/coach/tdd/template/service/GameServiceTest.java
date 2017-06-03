@@ -1,6 +1,8 @@
-package org.coach.tdd.template;
+package org.coach.tdd.template.service;
 
 import static org.junit.Assert.assertEquals;
+import org.coach.tdd.template.entity.CellArray;
+import org.coach.tdd.template.entity.CellStatus;
 import org.junit.Before;
 import org.junit.Test;
 

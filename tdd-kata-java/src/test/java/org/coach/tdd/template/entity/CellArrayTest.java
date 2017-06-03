@@ -1,4 +1,4 @@
-package org.coach.tdd.template;
+package org.coach.tdd.template.entity;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;

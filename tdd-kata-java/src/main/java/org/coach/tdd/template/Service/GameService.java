@@ -1,15 +1,17 @@
-package org.coach.tdd.template;
+package org.coach.tdd.template.service;
 
 import java.util.Random;
+import org.coach.tdd.template.entity.CellArray;
+import org.coach.tdd.template.entity.CellStatus;
 
 public class GameService {
     private CellArray cells;
 
-    GameService(int x, int y) {
-        cells = new CellArray(x , y);
+    public GameService(int rows, int colums) {
+        cells = new CellArray(rows , colums);
     }
 
-    GameService(CellArray cells) {
+    public GameService(CellArray cells) {
         this.cells = cells;
     }
 

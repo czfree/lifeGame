@@ -23,7 +23,7 @@ jacocoTestReport {
 
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/Application**','**/CellArrayOutput**','**/CellStatus**','**/MainControl**'])
+            fileTree(dir: it, exclude: ['**/Application**','**/CellStatus**','**/MainControl**','**/ViewControl**','**/ViewJFrame**','**/ViewJPanel**'])
         })
     }
 

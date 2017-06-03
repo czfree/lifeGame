@@ -1,4 +1,4 @@
-package org.coach.tdd.template;
+package org.coach.tdd.template.entity;
 
 /**
  * Created by czfree on 2017/6/3.
