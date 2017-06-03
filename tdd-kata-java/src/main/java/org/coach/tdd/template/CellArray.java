@@ -19,6 +19,14 @@ public class CellArray {
         }
     }
 
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColums() {
+        return colums;
+    }
+
     public CellStatus getCellStatus(int x, int y) {
         if (!isCoordinateLegal(x, y)) {
             throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
