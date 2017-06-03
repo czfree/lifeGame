@@ -13,18 +13,18 @@ public class CellGroup {
     /*
      * @param initCell 用于初始化的该类的二维数组，为0表示初始死亡，非0表示存活，数组不合法抛异常
      */
-    public CellGroup(int[][] initCell){
+    public CellGroup(int[][] initCell) {
         rows = initCell.length;
         colums = initCell[0].length;
-        for(int i = 1 ; i < rows ; i++){
-            if(initCell[i].length != colums)
+        for (int i = 1 ; i < rows ; i++) {
+            if (initCell[i].length != colums) {
                 throw new IllegalArgumentException("argument illegal");
+            }
         }
         currentCellGroupStatus = new CellStatus[rows][colums];
         nextCellGroupStatus = new CellStatus[rows][colums];
-
-        for(int i = 0 ;i < rows ; i++){
-            for(int j = 0 ; j < colums ; j++){
+        for (int i = 0 ; i < rows ; i++) {
+            for (int j = 0 ; j < colums ; j++) {
                 currentCellGroupStatus[i][j] = (initCell[i][j] == 0 ? CellStatus.Dead : CellStatus.Active);
             }
         }
@@ -34,42 +34,51 @@ public class CellGroup {
      * @param x,y 指定细胞的坐标
      * @return 指定细胞周围存活细胞的数量
      */
-    public int calculateAroundCellNum(int x,int y){
-        if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
+    public int calculateAroundCellNum(int x, int y) {
+        if (!isLegal(x, y)) {
+            throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
+        }
         int aroundCellNum = 0;
-        for(int i = x - 1 ; i <= x + 1 ;i++){
-            for(int j = y - 1 ; j <= y + 1; j++){
-                if(isLegal(i,j)){
-                    if(i==x && j == y) continue;
-                    aroundCellNum += isActive(i,j) ? 1 : 0;
+        for (int i = x - 1; i <= x + 1; i++) {
+            for (int j = y - 1; j <= y + 1; j++) {
+                if (isLegal(i, j)) {
+                    aroundCellNum += isActive(i, j) ? 1 : 0;
                 }
             }
         }
+        aroundCellNum -= isActive(x, y) ?  1 : 0;
         return aroundCellNum;
     }
     /*
          * 计算当前指定细胞的下一个状态
-         * @param x,y 当前指定细胞的坐标
+         * @param x, y 当前指定细胞的坐标
          * @return 当前指定细胞的下一个状态
          */
-    public CellStatus nextCellStatus(int x,int y){
-        if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
-        switch (calculateAroundCellNum(x,y)){
-            case 3:
-                return CellStatus.Active;
-            case 2:
-                return isActive(x,y) ? CellStatus.Active:CellStatus.Dead;
+    public CellStatus nextCellStatus(int x, int y) {
+        CellStatus cellStatusRet;
+        if (!isLegal(x, y)) {
+            throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
         }
-        return CellStatus.Dead;
+        switch (calculateAroundCellNum(x, y)) {
+            case 3 :
+                cellStatusRet = CellStatus.Active;
+                break;
+            case 2 :
+                cellStatusRet = isActive(x, y) ? CellStatus.Active : CellStatus.Dead;
+                break;
+            default:
+                cellStatusRet = CellStatus.Dead;
+        }
+        return cellStatusRet;
     }
     /*
         * 更新所有细胞的当前状态
      */
-    public void updateCellGroupStatus(){
+    public void updateCellGroupStatus() {
         nextCellGroupStatus = new CellStatus[rows][colums];
-        for(int i = 0 ; i < rows ; i++){
-            for(int j = 0 ; j < colums ; j++){
-                nextCellGroupStatus[i][j] = nextCellStatus(i,j);
+        for (int i = 0 ; i < rows ; i++) {
+            for (int j = 0 ; j < colums ; j++) {
+                nextCellGroupStatus[i][j] = nextCellStatus(i, j);
             }
         }
         currentCellGroupStatus = nextCellGroupStatus;
@@ -79,30 +88,35 @@ public class CellGroup {
         * @param x，y  当前指定细胞的坐标
         * @return 当前指定细胞的状态
      */
-    public boolean isActive(int x,int y){
-        if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
+    public boolean isActive(int x, int y) {
+        if (!isLegal(x, y)) {
+            throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
+        }
         return currentCellGroupStatus[x][y] == CellStatus.Active;
     }
 
-    public boolean isDead(int x, int y){
-        if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
+    public boolean isDead(int x, int y) {
+        if (!isLegal(x, y)) {
+            throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
+        }
         return currentCellGroupStatus[x][y] == CellStatus.Dead;
     }
 
-    public int getRows(){
+    public int getRows() {
         return rows;
     }
 
-    public int getColums(){
+    public int getColums() {
         return  colums;
     }
     /*
       * 判断单个细胞的坐标范围是否合法
       * @return ture 合法，false 不合法
      */
-    private boolean isLegal(int x,int y){
-        if(x < 0 || y < 0 || x >= rows || y >= colums)
+    private boolean isLegal(int x, int y) {
+        if (x < 0 || y < 0 || x >= rows || y >= colums) {
             return false;
+        }
         return true;
     }
 }
