@@ -19,7 +19,6 @@ public class CellGroupTest {
                 {0,0,0,0,0}
         };
         cellGroupOne = new CellGroup(initCellOne);
-
     }
 
     @Test
@@ -37,10 +36,16 @@ public class CellGroupTest {
         int[][] initCellIllegal = {
             {1,1,0,1,0},
             {0,0,0,1},
-            {1,1,1,1,1,0},
+            {1,1,1,1,1,0,1},
             {0,0,0,0,0}
         };
         CellGroup cellGroupIllegal = new CellGroup(initCellIllegal);
-
+    }
+    
+    @Test
+    public void calculateAroundCellNumShouldCorrect(){
+        assertEquals(cellGroupOne.calculateAroundCellNum(1,3),6);
+        assertEquals(cellGroupOne.calculateAroundCellNum(2,1),3);
+        assertEquals(cellGroupOne.calculateAroundCellNum(0,0),1);
     }
 }

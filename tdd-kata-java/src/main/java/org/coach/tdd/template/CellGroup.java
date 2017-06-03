@@ -31,6 +31,21 @@ public class CellGroup {
         }
     }
 
+    public int calculateAroundCellNum(int x,int y){
+        if(!isLegal(x,y))
+            throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
+        int aroundCellNum = 0;
+        for(int i = x - 1 ; i <= x + 1 ;i++){
+            for(int j = y - 1 ; j <= y + 1; j++){
+                if(isLegal(i,j)){
+                    if(i==x && j == y) continue;
+                    aroundCellNum += isActive(i,j) ? 1 : 0;
+                }
+            }
+        }
+        return aroundCellNum;
+    }
+
     public boolean isActive(int x,int y){
         if(!isLegal(x,y))
             throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
