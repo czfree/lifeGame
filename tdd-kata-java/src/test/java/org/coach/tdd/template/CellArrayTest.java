@@ -27,11 +27,13 @@ public class CellArrayTest {
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void getCellStatueArgumentOutOfBoundsShouldThrowExpection() {
-        cellArray.getCellStatus(11, 11);
+        cellArray.getCellStatus(11, 5);
+        cellArray.getCellStatus(-1, 5);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void setCellStatueArgumentOutOfBoundsShouldThrowExpection() {
-        cellArray.setCellStatus(11, 11, CellStatus.Active);
+        cellArray.setCellStatus(5, 11, CellStatus.Active);
+        cellArray.getCellStatus(5, -1);
     }
 }

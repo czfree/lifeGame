@@ -1,13 +1,9 @@
 package org.coach.tdd.template;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
-/**
- * Created by czfree on 2017/6/3.
- */
 public class GameServiceTest {
     private GameService gameService;
     @Before
@@ -24,7 +20,7 @@ public class GameServiceTest {
 
     @Test
     public void calculateActiveNeighborShouldCorrect() {
-        assertEquals(gameService.calculateActiveNeighbor(1, 1),  4);
+        assertEquals(gameService.calculateActiveNeighbor(1, 1),  5);
         assertEquals(gameService.calculateActiveNeighbor(5, 5),  0);
         assertEquals(gameService.calculateActiveNeighbor(0, 0),  3);
     }

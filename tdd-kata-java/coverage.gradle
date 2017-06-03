@@ -9,6 +9,8 @@ ext {
             'method'     : 95,
             'class'      : 95
     ]
+
+    
 }
 
 jacocoTestReport {
