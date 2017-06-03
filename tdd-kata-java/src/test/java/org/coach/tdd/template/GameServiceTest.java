@@ -33,4 +33,16 @@ public class GameServiceTest {
         assertEquals(gameService.getCells().getCellStatus(1, 1), CellStatus.DEAD);
         assertEquals(gameService.getCells().getCellStatus(2, 2), CellStatus.DEAD);
     }
+
+    @Test
+    public void setCellsShouldBeWork() {
+        int rows = gameService.getCells().getRows();
+        int colums =  gameService.getCells().getColums();
+        GameService nGameService = new GameService(rows, colums);
+        nGameService.randInitCellArray();
+        nGameService.setCells(gameService.getCells());
+        assertEquals(nGameService.calculateActiveNeighbor(1, 1),  5);
+        assertEquals(nGameService.calculateActiveNeighbor(5, 5),  0);
+        assertEquals(nGameService.calculateActiveNeighbor(0, 0),  3);
+    }
 }

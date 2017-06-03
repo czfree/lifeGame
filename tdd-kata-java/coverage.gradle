@@ -9,8 +9,6 @@ ext {
             'method'     : 95,
             'class'      : 95
     ]
-
-    
 }
 
 jacocoTestReport {
@@ -25,7 +23,7 @@ jacocoTestReport {
 
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/Application**'])
+            fileTree(dir: it, exclude: ['**/Application**','**/CellArrayOutput**','**/CellStatus**','**/MainControl**'])
         })
     }
 

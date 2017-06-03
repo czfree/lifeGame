@@ -26,14 +26,22 @@ public class CellArrayTest {
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void getCellStatueArgumentOutOfBoundsShouldThrowExpection() {
+    public void getCellStatueArgumentOutOfBoundsShouldThrowExpectionOne() {
         cellArray.getCellStatus(11, 5);
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void getCellStatueArgumentOutOfBoundsShouldThrowExpectionTwo() {
         cellArray.getCellStatus(-1, 5);
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void setCellStatueArgumentOutOfBoundsShouldThrowExpection() {
+    public void setCellStatueArgumentOutOfBoundsShouldThrowExpectionOne() {
         cellArray.setCellStatus(5, 11, CellStatus.Active);
-        cellArray.getCellStatus(5, -1);
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void setCellStatueArgumentOutOfBoundsShouldThrowExpectionTwo() {
+        cellArray.setCellStatus(5, -1, CellStatus.Active);
     }
 }
