@@ -17,6 +17,10 @@ public class CellGroup {
     public CellGroup(int[][] initCell){
         rows = initCell.length;
         colums = initCell[0].length;
+        for(int i = 1 ; i < rows ; i++){
+            if(initCell[i].length != colums)
+                throw new IllegalArgumentException("argument illegal");
+        }
         currentCellGroupStatus = new CellStatus[rows][colums];
         nextCellGroupStatus = new CellStatus[rows][colums];
 

@@ -19,6 +19,7 @@ public class CellGroupTest {
                 {0,0,0,0,0}
         };
         cellGroupOne = new CellGroup(initCellOne);
+
     }
 
     @Test
@@ -29,5 +30,17 @@ public class CellGroupTest {
         assertTrue(cellGroupOne.isDead(3,4));
         assertFalse(cellGroupOne.isActive(0,2));
         assertFalse(cellGroupOne.isDead(0,0));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void illegalInputArrayShouldThrowException(){
+        int[][] initCellIllegal = {
+            {1,1,0,1,0},
+            {0,0,0,1},
+            {1,1,1,1,1,0},
+            {0,0,0,0,0}
+        };
+        CellGroup cellGroupIllegal = new CellGroup(initCellIllegal);
+
     }
 }
