@@ -41,11 +41,16 @@ public class CellGroupTest {
         };
         CellGroup cellGroupIllegal = new CellGroup(initCellIllegal);
     }
-    
+
     @Test
     public void calculateAroundCellNumShouldCorrect(){
         assertEquals(cellGroupOne.calculateAroundCellNum(1,3),6);
         assertEquals(cellGroupOne.calculateAroundCellNum(2,1),3);
         assertEquals(cellGroupOne.calculateAroundCellNum(0,0),1);
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void illegalCoordinateInputShouldThrowExpection(){
+        cellGroupOne.calculateAroundCellNum(7,7);
     }
 }
