@@ -1,19 +1,18 @@
 package org.coach.tdd.template;
 
-/**
- * Created by czfree on 2017/6/3.
- */
 public class CellGroup {
     private CellStatus[][] currentCellGroupStatus;
     private CellStatus[][] nextCellGroupStatus;
     private int rows;
     private int colums;
-    //细胞状态
+    //细胞状态,枚举类
     static enum CellStatus {
         Active,
         Dead;
     }
-
+    /*
+     * @param initCell 用于初始化的该类的二维数组，为0表示初始死亡，非0表示存活，数组不合法抛异常
+     */
     public CellGroup(int[][] initCell){
         rows = initCell.length;
         colums = initCell[0].length;
@@ -30,7 +29,11 @@ public class CellGroup {
             }
         }
     }
-
+    /*
+     * 计算细胞周围存活细胞的数量
+     * @param x,y 指定细胞的坐标
+     * @return 指定细胞周围存活细胞的数量
+     */
     public int calculateAroundCellNum(int x,int y){
         if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
         int aroundCellNum = 0;
@@ -44,7 +47,11 @@ public class CellGroup {
         }
         return aroundCellNum;
     }
-
+    /*
+         * 计算当前指定细胞的下一个状态
+         * @param x,y 当前指定细胞的坐标
+         * @return 当前指定细胞的下一个状态
+         */
     public CellStatus nextCellStatus(int x,int y){
         if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
         switch (calculateAroundCellNum(x,y)){
@@ -55,7 +62,9 @@ public class CellGroup {
         }
         return CellStatus.Dead;
     }
-
+    /*
+        * 更新所有细胞的当前状态
+     */
     public void updateCellGroupStatus(){
         nextCellGroupStatus = new CellStatus[rows][colums];
         for(int i = 0 ; i < rows ; i++){
@@ -65,7 +74,11 @@ public class CellGroup {
         }
         currentCellGroupStatus = nextCellGroupStatus;
     }
-
+    /*
+        * 判断当前指定细胞的状态
+        * @param x，y  当前指定细胞的坐标
+        * @return 当前指定细胞的状态
+     */
     public boolean isActive(int x,int y){
         if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
         return currentCellGroupStatus[x][y] == CellStatus.Active;
@@ -83,7 +96,10 @@ public class CellGroup {
     public int getColums(){
         return  colums;
     }
-
+    /*
+      * 判断单个细胞的坐标范围是否合法
+      * @return ture 合法，false 不合法
+     */
     private boolean isLegal(int x,int y){
         if(x < 0 || y < 0 || x >= rows || y >= colums)
             return false;
