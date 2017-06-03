@@ -53,4 +53,11 @@ public class CellGroupTest {
     public void illegalCoordinateInputShouldThrowExpection(){
         cellGroupOne.calculateAroundCellNum(7,7);
     }
+
+    @Test
+    public void cellNextStatusShouldCorrect(){
+        assertEquals(CellGroup.CellStatus.Active,cellGroupOne.nextCellStatus(0,1));
+        assertEquals(CellGroup.CellStatus.Active,cellGroupOne.nextCellStatus(0,2));
+        assertEquals(CellGroup.CellStatus.Dead,cellGroupOne.nextCellStatus(2,3));
+    }
 }

@@ -32,8 +32,7 @@ public class CellGroup {
     }
 
     public int calculateAroundCellNum(int x,int y){
-        if(!isLegal(x,y))
-            throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
+        if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
         int aroundCellNum = 0;
         for(int i = x - 1 ; i <= x + 1 ;i++){
             for(int j = y - 1 ; j <= y + 1; j++){
@@ -46,15 +45,24 @@ public class CellGroup {
         return aroundCellNum;
     }
 
+    public CellStatus nextCellStatus(int x,int y){
+        if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
+        switch (calculateAroundCellNum(x,y)){
+            case 3:
+                return CellStatus.Active;
+            case 2:
+                return isActive(x,y) ? CellStatus.Active:CellStatus.Dead;
+        }
+        return CellStatus.Dead;
+    }
+
     public boolean isActive(int x,int y){
-        if(!isLegal(x,y))
-            throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
+        if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
         return currentCellGroupStatus[x][y] == CellStatus.Active;
     }
 
     public boolean isDead(int x, int y){
-        if(!isLegal(x,y))
-            throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
+        if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
         return currentCellGroupStatus[x][y] == CellStatus.Dead;
     }
 
