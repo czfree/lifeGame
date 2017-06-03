@@ -60,4 +60,12 @@ public class CellGroupTest {
         assertEquals(CellGroup.CellStatus.Active,cellGroupOne.nextCellStatus(0,2));
         assertEquals(CellGroup.CellStatus.Dead,cellGroupOne.nextCellStatus(2,3));
     }
+
+    @Test
+    public void updateCellGroupStatueCorrect(){
+        cellGroupOne.updateCellGroupStatus();
+        assertEquals(CellGroup.CellStatus.Dead,cellGroupOne.nextCellStatus(0,0));
+        assertEquals(CellGroup.CellStatus.Active,cellGroupOne.nextCellStatus(3,3));
+        assertEquals(CellGroup.CellStatus.Dead,cellGroupOne.nextCellStatus(1,2));
+    }
 }

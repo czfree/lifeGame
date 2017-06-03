@@ -56,6 +56,16 @@ public class CellGroup {
         return CellStatus.Dead;
     }
 
+    public void updateCellGroupStatus(){
+        nextCellGroupStatus = new CellStatus[rows][colums];
+        for(int i = 0 ; i < rows ; i++){
+            for(int j = 0 ; j < colums ; j++){
+                nextCellGroupStatus[i][j] = nextCellStatus(i,j);
+            }
+        }
+        currentCellGroupStatus = nextCellGroupStatus;
+    }
+
     public boolean isActive(int x,int y){
         if(!isLegal(x,y)) throw new ArrayIndexOutOfBoundsException("input x y out of bounds");
         return currentCellGroupStatus[x][y] == CellStatus.Active;
